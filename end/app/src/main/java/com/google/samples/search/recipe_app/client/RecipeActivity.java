@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Google Inc. All Rights Reserved.
+ * Copyright 2015 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -110,7 +110,7 @@ public class RecipeActivity extends Activity {
             final Uri APP_URI = BASE_APP_URI.buildUpon().appendPath(recipe.getId()).build();
 
             // Call the Google Analytics API
-            mAnalytics.trackScreenView(getIntent(), TITLE);
+            mAnalytics.trackScreenView(this, TITLE);
 
             Action viewAction = Action.newAction(Action.TYPE_VIEW, TITLE, APP_URI);
 

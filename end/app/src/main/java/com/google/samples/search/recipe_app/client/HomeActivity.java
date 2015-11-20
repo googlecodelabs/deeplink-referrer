@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Google Inc. All Rights Reserved.
+ * Copyright 2015 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,6 @@ public class HomeActivity extends Activity {
         super.onStart();
 
         // Call the Google Analytics API
-        mAnalytics.trackScreenView(getIntent(), "Home screen");
+        mAnalytics.trackScreenView(this, "Home screen");
     }
 }
