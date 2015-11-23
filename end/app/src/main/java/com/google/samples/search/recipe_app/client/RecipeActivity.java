@@ -58,7 +58,7 @@ public class RecipeActivity extends Activity {
     private static final Uri BASE_APP_URI = Uri.parse("android-app://com.google.samples.search.recipe_app/http/recipe-app.search.samples.google.com/recipe/");
 
     private GoogleApiClient mClient;
-    private AnalyticsApplication mAnalytics = new AnalyticsApplication();
+    private AnalyticsApplication mAnalytics;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -83,6 +83,7 @@ public class RecipeActivity extends Activity {
         setContentView(R.layout.activity_recipe);
 
         mClient = new GoogleApiClient.Builder(this).addApi(AppIndex.APP_INDEX_API).build();
+        mAnalytics = (AnalyticsApplication) getApplication();
 
         onNewIntent(getIntent());
     }

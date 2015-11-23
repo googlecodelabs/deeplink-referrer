@@ -7,7 +7,7 @@ Android app.
 This is the code part of the watch Deep Link Referrer codelab.
 The code lab consists of 5 steps.
 
-A [site](https://code-labs.io/search/deeplink-referrer) to guide you through
+A [site](https://code-labs.io/codelabs/deeplink-referrer/) to guide you through
 the code lab is available.
 
 To get started open the site and follow the instructions.
