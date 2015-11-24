@@ -39,9 +39,10 @@ public class AnalyticsApplication extends Application {
     private static final String QUICK_SEARCH_BOX = "com.google.android.googlequicksearchbox";
     private static final String APP_CRAWLER = "com.google.appcrawler";
 
-    private static final String REFERRER = "utm_source";
-    private static final String MEDIUM = "utm_medium";
+    private static final String REFERRER_PARAM = "utm_source";
+    private static final String MEDIUM_PARAM = "utm_medium";
 
+    private static final String NONE = "none";
     private static final String DIRECT = "direct";
     private static final String ORGANIC = "organic";
     private static final String REFERRAL = "referral";
@@ -68,7 +69,8 @@ public class AnalyticsApplication extends Application {
             // App was opened directly by the user
             Log.d(this.getClass().getName(), "Referrer: Direct open");
             tracker.send(new HitBuilders.ScreenViewBuilder()
-                    .set(MEDIUM, DIRECT)
+                    .setCampaignParamsFromUrl(String.format("?%s=%s&%s=%s",
+                            MEDIUM_PARAM, NONE, REFERRER_PARAM, DIRECT))
                     .build());
         } else {
             // App was referred via a deep link
@@ -78,14 +80,14 @@ public class AnalyticsApplication extends Application {
                 if (host.equals("www.google.com")) {
                     Log.d(this.getClass().getName(), "Referrer: Browser (google.com)");
                     tracker.send(new HitBuilders.ScreenViewBuilder()
-                            .set(MEDIUM, ORGANIC)
-                            .set(REFERRER, "google.com")
+                            .setCampaignParamsFromUrl(String.format("?%s=%s&%s=%s",
+                                    MEDIUM_PARAM, ORGANIC, REFERRER_PARAM, "google.com"))
                             .build());
                 } else {
                     Log.d(this.getClass().getName(), "Referrer: Browser (other website)");
                     tracker.send(new HitBuilders.ScreenViewBuilder()
-                            .set(MEDIUM, REFERRAL)
-                            .set(REFERRER, host)
+                            .setCampaignParamsFromUrl(String.format("?%s=%s&%s=%s",
+                                    MEDIUM_PARAM, REFERRAL, REFERRER_PARAM, host))
                             .build());
                 }
 
@@ -97,16 +99,16 @@ public class AnalyticsApplication extends Application {
                     // App was opened from the Google app
                     Log.d(this.getClass().getName(), "Referrer: Google Search App");
                     tracker.send(new HitBuilders.ScreenViewBuilder()
-                            .set(MEDIUM, ORGANIC)
-                            .set(REFERRER, "google_app")
+                            .setCampaignParamsFromUrl(String.format("?%s=%s&%s=%s",
+                                    MEDIUM_PARAM, ORGANIC, REFERRER_PARAM, "google_app"))
                             .build());
 
                 } else if (!APP_CRAWLER.equals(referrerPackage)) {
                     // App was deep linked into from another app (excl. Google crawler)
                     Log.d(this.getClass().getName(), "Referrer: Other android app");
                     tracker.send(new HitBuilders.ScreenViewBuilder()
-                            .set(MEDIUM, REFERRAL)
-                            .set(REFERRER, referrerPackage)
+                            .setCampaignParamsFromUrl(String.format("?%s=%s&%s=%s",
+                                    MEDIUM_PARAM, REFERRAL, REFERRER_PARAM, referrerPackage))
                             .build());
                 }
                 // Otherwise, fall through to make sure Google app crawler views
