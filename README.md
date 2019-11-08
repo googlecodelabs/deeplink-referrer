@@ -1,5 +1,3 @@
-Deep Link Referrer Codelab
-===============================
 # This code is DEPRECATED
 
 The associated codelab and this code have been deprecated. Please use the following resources instead:
